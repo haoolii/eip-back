@@ -34,7 +34,7 @@ router.post('/', function(req, res, next) {
         return res.json('404', "errors");
     }
 
-    if (hours > 8) {
+    if (hours > 8 || hours <= 0) {
         return res.json('403', "超出工作時間");
     }
 
@@ -64,6 +64,11 @@ router.put('/:id', function(req, res, next) {
 
     if (!date || !hours || !project || !detail) {
         return res.json('404', "errors");
+    }
+
+    
+    if (hours > 8 || hours <= 0) {
+        return res.json('403', "超出工作時間");
     }
 
     reports = reports.map(r => {
